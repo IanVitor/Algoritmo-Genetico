@@ -61,18 +61,6 @@ body {
   border-radius: 30% 30% 40% 40%;
 }
 
-.cauda{
-  content: '';
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  z-index: 10;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  transform: translateX(-50%);
-}
-
 .pata-esquerda {
   position: absolute;
   top: 30px;

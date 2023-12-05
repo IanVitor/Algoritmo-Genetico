@@ -15,32 +15,32 @@
     <div class="cabeca"></div>
     <div class="cabecaMenor"></div>
     <div class="corpo"></div>
-    <div class="cauda"></div>
     <div class="pata-esquerda"></div>
     <div class="pata-esquerda esquerda-traseira"></div>
     <div class="pata-direita"></div>
     <div class="pata-direita direita-traseira"></div>
   </div>
 
-  <img width="200px" src="https://cdn-icons-png.flaticon.com/512/5222/5222229.png" alt="">
-
   <script type="module">
     import Individuo from './Individuo.js'
     import AlgoritmoGenetico from './algoritmoGenetico.js'
 
-    const teste = new AlgoritmoGenetico(6)
-
-    teste.inicializarPopulacao()
-    teste.calcularFitness()
-    teste.avaliarIndividuos()
-    teste.imprimirGeracao()
-
     let besouro = document.querySelector('.corpo')
-    let cauda = document.querySelector('.cauda')
+    let qtdGeracoes = window.prompt("Quantas gerações deseja rodar:")
+    let tamPopulacao = window.prompt("Quantos individuos por geração:")
+    
+    const teste = new AlgoritmoGenetico(tamPopulacao)
+    
+    for(let i=0;i< qtdGeracoes; i++){
+      
+      teste.inicializarPopulacao()
+      teste.calcularFitness()
+      teste.avaliarIndividuos()
+      teste.imprimirGeracao()
+    }
 
     besouro.style.backgroundColor = `rgb(${teste.populacao[0].cromossomo.red},${teste.populacao[0].cromossomo.green},${teste.populacao[0].cromossomo.blue})`
 
-    cauda.style.backgroundColor = `rgb(${teste.populacao[0].cromossomo.red},${teste.populacao[0].cromossomo.green},${teste.populacao[0].cromossomo.blue})`
   </script>
 
 </body>

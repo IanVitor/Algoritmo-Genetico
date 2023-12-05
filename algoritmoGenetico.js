@@ -28,6 +28,7 @@ export default class AlgoritmoGenetico{
   }
 
   inicializarPopulacao() {
+    this.populacao = []
     for(let i =0; i<this.tamanhoPopulacao; i++){
       this.populacao.push(new Individuo(randomRgb()))
     }
@@ -50,7 +51,6 @@ export default class AlgoritmoGenetico{
     })
 
     console.log(this.populacao)
-
   }
 
   somaAvaliacoes(){

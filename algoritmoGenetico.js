@@ -74,51 +74,49 @@ export default class AlgoritmoGenetico{
   }
 
   crossOver(){
-    let filhos = []
     let corte = parseInt((Math.random() * 1+1).toFixed(0))
+    let filhos = []
 
     let pai1 = this.selecionaPai(this.somaAvaliacoes())
     let pai2 = this.selecionaPai(this.somaAvaliacoes())
 
     let cromossomo1 = [this.populacao[pai1].cromossomo.red, this.populacao[pai1].cromossomo.green, this.populacao[pai1].cromossomo.blue]
-    let cromossomo2 = [this.populacao[pai1].cromossomo.red, this.populacao[pai1].cromossomo.green, this.populacao[pai1].cromossomo.blue]
+    let cromossomo2 = [this.populacao[pai2].cromossomo.red, this.populacao[pai2].cromossomo.green, this.populacao[pai2].cromossomo.blue]
 
-    console.log(corte)
+    console.log('----Teste de Crossover----')
 
-    /*
-      c1 [1,2,3] corte = 1
-      aux [5,6]
+    console.log('Posição do corte: '+corte)
+    console.log('Cromossomo 1: '+cromossomo1)
+    console.log('Cromossomo 2: '+cromossomo2)
 
-      c2 [4,5,6]
-      c2 [4,2,3]
-      c1 [1,5,6]
+    let aux = cromossomo2.slice(0,corte)
 
-      mutação
-      0,2
-      0,134
+    console.log('aux: '+aux)
 
-      [12,34,56]
-      [7,34,56]
+    console.log('cromossomo 2: '+cromossomo2.slice(0,corte))
+    console.log('cromossomo teste: '+cromossomo1.slice(corte,3))
 
-    */
-   let aux = []
+    console.log('\ncromossomo 1: '+cromossomo1.slice(0,corte))
+    console.log('cromossomo teste: '+cromossomo2.slice(corte,3))
 
-    aux.unshift(cromossomo2[0])
-    aux = cromossomo2.slice(corte)
-    cromossomo1.push(aux)
+    aux.push(cromossomo1.slice(corte,3))
+    console.log('filho 2: '+aux)
+    console.log('filho: '+(aux.splice(1)).shift())
 
-
-    console.log(aux)
-    console.log(cromossomo2)
-    console.log(cromossomo1)
-
-    let filho1 = new Individuo({
-      red: 123,
-      green: 123,
-      blue: 123
+    filhos.push({
+      cromossomo: {
+        red: aux[0],
+        green: aux[1],
+        blue: aux[2],
+      },
+      geracao: this.populacao[0].geracao+1,
+      fitness: 0.5
     })
 
-    filhos.push(new Individuo(randomRgb()))
+    aux = cromossomo1.slice(0,corte)
+    aux.push(cromossomo2.slice(corte,3))
+    console.log('filho 1: '+aux)
+
 
     return filhos
   }

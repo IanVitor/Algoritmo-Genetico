@@ -164,6 +164,22 @@ form{
   justify-content: center;
 }
 
+/* Responsivo */
+
+@media (max-width: 640px) {
+  main{
+    flex-direction: column;
+  }
+  #form{
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+  }
+  #results--panel{
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
 /* Besouro Style */
 
 .besouro {

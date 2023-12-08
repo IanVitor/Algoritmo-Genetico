@@ -26,21 +26,36 @@
     import AlgoritmoGenetico from './algoritmoGenetico.js'
 
     let besouro = document.querySelector('.corpo')
-    // let qtdGeracoes = window.prompt("Quantas gerações deseja rodar:")
-    // let tamPopulacao = window.prompt("Quantos individuos por geração:")
-    
-    const teste = new AlgoritmoGenetico(20)
-    
-    for(let i=0;i< 1; i++){
-      
-      teste.inicializarPopulacao()
-      teste.calcularFitness()
-      teste.avaliarIndividuos()
-      teste.imprimirGeracao()
-      console.log(teste.crossOver())
-    }
 
-    besouro.style.backgroundColor = `rgb(${teste.populacao[0].cromossomo.red},${teste.populacao[0].cromossomo.green},${teste.populacao[0].cromossomo.blue})`
+    let qtdGeracoes = 40
+    let tamPopulacao = 200
+    let populacao = []
+    let novaPopulacao = []
+
+    let teste = new AlgoritmoGenetico(tamPopulacao)
+    
+    teste.inicializarPopulacao(populacao)
+
+    for(let j=0;j<qtdGeracoes;j++){
+
+      teste.calcularFitness(populacao)
+      teste.avaliarIndividuos(populacao)
+      teste.imprimirGeracao(populacao)
+  
+      for(let i=0; i<tamPopulacao/2;i++){
+        teste.crossOver(populacao, novaPopulacao)
+        teste.calcularFitness(novaPopulacao)
+        teste.avaliarIndividuos(novaPopulacao)
+      }
+
+      populacao = novaPopulacao
+      novaPopulacao = []
+    }
+    
+    teste.imprimirGeracao(populacao)
+    
+    // Style
+    besouro.style.backgroundColor = `rgb(${populacao[0].cromossomo.red},${populacao[0].cromossomo.green},${populacao[0].cromossomo.blue})`
 
   </script>
 

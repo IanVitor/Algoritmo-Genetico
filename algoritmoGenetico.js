@@ -118,23 +118,21 @@ export default class AlgoritmoGenetico {
   }
 
   calculaMutacao(taxaMutacao, novaPopulacao){
+    console.log(novaPopulacao)
     for(let i = 0; i < novaPopulacao.length; i++){
       let valorSorteadoR = Math.random().toFixed(2);
-      console.log("verde", valorSorteadoR)
       if(valorSorteadoR < taxaMutacao){
         let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.red).toFixed(1));
         novaPopulacao[i].cromossomo.red = novoValor;
       }
       
       let valorSorteadoG = Math.random().toFixed(2);
-      console.log("vermelho", valorSorteadoG)
       if(valorSorteadoG < taxaMutacao){
         let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.green).toFixed(1));
         novaPopulacao[i].cromossomo.green = novoValor;
       }
       
       let valorSorteadoB = Math.random().toFixed(2);
-      console.log("azul", valorSorteadoB)
       if(valorSorteadoB < taxaMutacao){
         let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.blue).toFixed(1));
         novaPopulacao[i].cromossomo.blue = novoValor;

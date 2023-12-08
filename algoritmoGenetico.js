@@ -117,9 +117,33 @@ export default class AlgoritmoGenetico {
     novaPopulacao.push(new Individuo(cromossomoFilho2))
   }
 
+  calculaMutacao(taxaMutacao, novaPopulacao){
+    console.log(novaPopulacao)
+    for(let i = 0; i < novaPopulacao.length; i++){
+      let valorSorteadoR = Math.random().toFixed(2);
+      if(valorSorteadoR < taxaMutacao){
+        let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.red).toFixed(1));
+        novaPopulacao[i].cromossomo.red = novoValor;
+      }
+      
+      let valorSorteadoG = Math.random().toFixed(2);
+      if(valorSorteadoG < taxaMutacao){
+        let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.green).toFixed(1));
+        novaPopulacao[i].cromossomo.green = novoValor;
+      }
+      
+      let valorSorteadoB = Math.random().toFixed(2);
+      if(valorSorteadoB < taxaMutacao){
+        let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.blue).toFixed(1));
+        novaPopulacao[i].cromossomo.blue = novoValor;
+      } 
+      this.arrayPopulacao = (novaPopulacao[i].cromossomo)
+    }
+  }
+
   imprimirGeracao(arrayPopulacao) {
     console.log(
-      `Melhor da Geração\nGeração: ${arrayPopulacao[0].geracao}\nFitness: ${arrayPopulacao[0].fitness}\nCromossomo: [${arrayPopulacao[0].cromossomo.red},${arrayPopulacao[0].cromossomo.green},${arrayPopulacao[0].cromossomo.blue}]`
+      `Melhor da Geração\nGeração: ${ arrayPopulacao[0].geracao}\nFitness: ${arrayPopulacao[0].fitness}\nCromossomo: [${arrayPopulacao[0].cromossomo.red},${arrayPopulacao[0].cromossomo.green},${arrayPopulacao[0].cromossomo.blue}]`
     );
   }
 }

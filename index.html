@@ -27,8 +27,9 @@
 
     let besouro = document.querySelector('.corpo')
 
-    let qtdGeracoes = 40
-    let tamPopulacao = 200
+    let qtdGeracoes = 1
+    let tamPopulacao = 3
+    let taxaMutacao = 0.4
     let populacao = []
     let novaPopulacao = []
 
@@ -41,11 +42,13 @@
       teste.calcularFitness(populacao)
       teste.avaliarIndividuos(populacao)
       teste.imprimirGeracao(populacao)
+      
   
       for(let i=0; i<tamPopulacao/2;i++){
         teste.crossOver(populacao, novaPopulacao)
         teste.calcularFitness(novaPopulacao)
         teste.avaliarIndividuos(novaPopulacao)
+        teste.calculaMutacao(taxaMutacao, novaPopulacao)
       }
 
       populacao = novaPopulacao

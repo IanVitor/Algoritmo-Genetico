@@ -10,55 +10,154 @@
 
 <body>
 
-  <div class="besouro">
-    <div class="antena"></div>
-    <div class="cabeca"></div>
-    <div class="cabecaMenor"></div>
-    <div class="corpo"></div>
-    <div class="pata-esquerda"></div>
-    <div class="pata-esquerda esquerda-traseira"></div>
-    <div class="pata-direita"></div>
-    <div class="pata-direita direita-traseira"></div>
-  </div>
+  <header>
+    <h1>ALGORITMO GENÉTICO</h1>
+    <h4>(Evolução dos Besouros)</h4>
+  </header>
+
+  <main>
+    <form id="form">
+      <div class="input--cont">
+        <label for="geracao">N. Gerações</label>
+        <input id="geracaoInput" name="geracao" min="0" type="number">
+      </div>
+      <div class="input--cont">
+        <label for="tamanho">Tamanho População</label>
+        <input id="tamPopulacaoInput" name="tamanho" min="0" type="number">
+      </div>
+      <div class="input--cont">
+        <label for="mutacao">Taxa Mutação</label>
+        <input id="taxaMuatacaoInput" name="mutacao" min="0" step="0.1" type="number">
+      </div>
+      <button id="submit">Start</button>
+    </form>
+
+    <section id="results--panel">
+      <div id="best--container">
+        <div id="best--header">
+          <p>9º Geração</p>
+          <p>RGB (12, 45, 67)</p>
+        </div>
+        <div id="best--beatle">
+          <div class="besouro">
+            <div class="antena"></div>
+            <div class="cabeca"></div>
+            <div class="cabecaMenor"></div>
+            <div class="corpo"></div>
+            <div class="pata-esquerda"></div>
+            <div class="pata-esquerda esquerda-traseira"></div>
+            <div class="pata-direita"></div>
+            <div class="pata-direita direita-traseira"></div>
+          </div>
+
+        </div>
+      </div>
+      <div id="results--container"></div>
+    </section>
+  </main>
 
   <script type="module">
     import Individuo from './Individuo.js'
     import AlgoritmoGenetico from './algoritmoGenetico.js'
 
-    let besouro = document.querySelector('.corpo')
+    const form = document.querySelector('#form')
 
-    let qtdGeracoes = 5
-    let tamPopulacao = 3
-    let taxaMutacao = 0.4
-    let populacao = []
-    let novaPopulacao = []
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      let container = document.querySelector('#results--container')
+      let qtdGeracoes = document.querySelector('#geracaoInput').value
+      let tamPopulacao = document.querySelector('#tamPopulacaoInput').value
+      let taxaMutacao = document.querySelector('#taxaMuatacaoInput').value
 
-    let teste = new AlgoritmoGenetico(tamPopulacao)
-    
-    teste.inicializarPopulacao(populacao)
+      let besouro = document.querySelector('.corpo')
 
-    for(let j=0;j<qtdGeracoes;j++){
+      let populacao = []
+      let novaPopulacao = []
 
-      teste.calcularFitness(populacao)
-      teste.avaliarIndividuos(populacao)
-      teste.imprimirGeracao(populacao)
+      let teste = new AlgoritmoGenetico(tamPopulacao)
+
+      container.innerHTML = ''
       
-  
-      for(let i=0; i<tamPopulacao/2;i++){
-        teste.crossOver(populacao, novaPopulacao)
-        teste.calcularFitness(novaPopulacao)
-        teste.avaliarIndividuos(novaPopulacao)
-        teste.calculaMutacao(taxaMutacao, novaPopulacao)
-      }
+      window.scrollTo(0, document.body.scrollHeight);
 
-      populacao = novaPopulacao
-      novaPopulacao = []
+      teste.inicializarPopulacao(populacao)
+      teste.geracaoAtual = 1
+
+      for (let j = 0; j < qtdGeracoes; j++) {
+
+        teste.calcularFitness(populacao)
+        teste.avaliarIndividuos(populacao)
+        teste.imprimirGeracao(populacao)
+
+        insertHtmlBeatles(populacao[0])
+
+        for (let i = 0; i < tamPopulacao / 2; i++) {
+          teste.crossOver(populacao, novaPopulacao)
+          teste.calcularFitness(novaPopulacao)
+          teste.avaliarIndividuos(novaPopulacao)
+          teste.calculaMutacao(taxaMutacao, novaPopulacao)
+        }
+        
+        insertBetterBeatle(populacao[0])
+        teste.geracaoAtual++
+        populacao = novaPopulacao
+        novaPopulacao = []
+      }
+    })
+
+    function insertHtmlBeatles(array) {
+      let container = document.querySelector('#results--container')
+      container.innerHTML += `
+    <div class="results--card">
+          <div class="card--beatle">
+            <div class="mini--beatle">
+              <div class="antena"></div>
+              <div class="cabeca"></div>
+              <div class="cabecaMenor"></div>
+              <div class="corpo" style="--bg: rgb(${array.cromossomo.red}, ${array.cromossomo.green}, ${array.cromossomo.blue});"></div>
+              <div class="pata-esquerda"></div>
+              <div class="pata-esquerda esquerda-traseira"></div>
+              <div class="pata-direita"></div>
+              <div class="pata-direita direita-traseira"></div>
+            </div>
+          </div>
+          <div class="card--header">
+            <div class="header--text">
+              <span>${array.geracao}º</span>
+              <p>Geração</p>
+            </div>
+            <div class="header--text">
+              <span>${array.fitness}</span>
+              <p>Fitness</p>
+            </div>
+          </div>
+        </div>
+    `
     }
-    
-    //teste.imprimirGeracao(populacao)
-    
+
+    function insertBetterBeatle (array){
+      let container = document.querySelector('#best--container')
+      container.innerHTML = `
+      <div id="best--header">
+          <p>${array.geracao}º Geração</p>
+          <p>Fitness ${array.fitness}</p>
+        </div>
+        <div id="best--beatle">
+          <div class="besouro">
+            <div class="antena"></div>
+            <div class="cabeca"></div>
+            <div class="cabecaMenor"></div>
+            <div class="corpo" style="--bg: rgb(${array.cromossomo.red}, ${array.cromossomo.green}, ${array.cromossomo.blue})"></div>
+            <div class="pata-esquerda"></div>
+            <div class="pata-esquerda esquerda-traseira"></div>
+            <div class="pata-direita"></div>
+            <div class="pata-direita direita-traseira"></div>
+          </div>
+        </div>`
+    }
+
     // Style
-    besouro.style.backgroundColor = `rgb(${populacao[0].cromossomo.red},${populacao[0].cromossomo.green},${populacao[0].cromossomo.blue})`
+    //besouro.style.backgroundColor = `rgb(${populacao[0].cromossomo.red},${populacao[0].cromossomo.green},${populacao[0].cromossomo.blue})`
 
   </script>
 

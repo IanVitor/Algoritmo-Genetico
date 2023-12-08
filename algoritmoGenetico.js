@@ -24,12 +24,13 @@ import Individuo from "./Individuo.js";
 export default class AlgoritmoGenetico {
   constructor(tamanhoPopulacao) {
     this.tamanhoPopulacao = tamanhoPopulacao;
+    this.geracaoAtual = 0
   }
 
   inicializarPopulacao(arrayPopulacao) {
     
     for (let i = 0; i < this.tamanhoPopulacao; i++) {
-      arrayPopulacao.push(new Individuo(randomRgb()));
+      arrayPopulacao.push(new Individuo(randomRgb(), 1));
     }
   }
 
@@ -106,7 +107,7 @@ export default class AlgoritmoGenetico {
       blue: cromossomo1[2],
     }
 
-    novaPopulacao.push(new Individuo(cromossomoFilho1))
+    novaPopulacao.push(new Individuo(cromossomoFilho1, this.geracaoAtual+1))
 
     let cromossomoFilho2 = {
         red: cromossomo2[0],
@@ -114,27 +115,26 @@ export default class AlgoritmoGenetico {
         blue: cromossomo2[2]
     }  
 
-    novaPopulacao.push(new Individuo(cromossomoFilho2))
+    novaPopulacao.push(new Individuo(cromossomoFilho2, this.geracaoAtual+1))
   }
 
   calculaMutacao(taxaMutacao, novaPopulacao){
-    console.log(novaPopulacao)
     for(let i = 0; i < novaPopulacao.length; i++){
       let valorSorteadoR = Math.random().toFixed(2);
       if(valorSorteadoR < taxaMutacao){
-        let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.red).toFixed(1));
+        let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.red).toFixed(0));
         novaPopulacao[i].cromossomo.red = novoValor;
       }
       
       let valorSorteadoG = Math.random().toFixed(2);
       if(valorSorteadoG < taxaMutacao){
-        let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.green).toFixed(1));
+        let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.green).toFixed(0));
         novaPopulacao[i].cromossomo.green = novoValor;
       }
       
       let valorSorteadoB = Math.random().toFixed(2);
       if(valorSorteadoB < taxaMutacao){
-        let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.blue).toFixed(1));
+        let novoValor = parseFloat((Math.random() * novaPopulacao[i].cromossomo.blue).toFixed(0));
         novaPopulacao[i].cromossomo.blue = novoValor;
       } 
       this.arrayPopulacao = (novaPopulacao[i].cromossomo)

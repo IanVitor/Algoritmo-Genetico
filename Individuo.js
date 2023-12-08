@@ -1,11 +1,11 @@
 export default class Individuo{
-  constructor(cromossomo){
+  constructor(cromossomo, geracao){
     this.cromossomo = {
       red: cromossomo.red,
       green: cromossomo.green,
       blue: cromossomo.blue
     }
-    this.geracao = 1
+    this.geracao = geracao
     this.fitness = 0
   }
 

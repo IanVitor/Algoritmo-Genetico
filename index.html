@@ -11,8 +11,13 @@
 <body>
 
   <header>
-    <h1>ALGORITMO GENÉTICO</h1>
-    <h4>(Evolução dos Besouros)</h4>
+    <div class="header--img">
+      <img src="assets/beetle.png" alt="icone de besouro">
+    </div>
+    <div id="header--text">
+      <h1>ALGORITMO GENÉTICO</h1>
+      <h4>(Evolução dos Besouros)</h4>
+    </div>
   </header>
 
   <main>
@@ -34,23 +39,6 @@
 
     <section id="results--panel">
       <div id="best--container">
-        <div id="best--header">
-          <p>9º Geração</p>
-          <p>RGB (12, 45, 67)</p>
-        </div>
-        <div id="best--beatle">
-          <div class="besouro">
-            <div class="antena"></div>
-            <div class="cabeca"></div>
-            <div class="cabecaMenor"></div>
-            <div class="corpo"></div>
-            <div class="pata-esquerda"></div>
-            <div class="pata-esquerda esquerda-traseira"></div>
-            <div class="pata-direita"></div>
-            <div class="pata-direita direita-traseira"></div>
-          </div>
-
-        </div>
       </div>
       <div id="results--container"></div>
     </section>
@@ -77,7 +65,7 @@
       let teste = new AlgoritmoGenetico(tamPopulacao)
 
       container.innerHTML = ''
-      
+
       window.scrollTo(0, document.body.scrollHeight);
 
       teste.inicializarPopulacao(populacao)
@@ -97,7 +85,7 @@
           teste.avaliarIndividuos(novaPopulacao)
           teste.calculaMutacao(taxaMutacao, novaPopulacao)
         }
-        
+
         insertBetterBeatle(populacao[0])
         teste.geracaoAtual++
         populacao = novaPopulacao
@@ -116,8 +104,10 @@
               <div class="cabecaMenor"></div>
               <div class="corpo" style="--bg: rgb(${array.cromossomo.red}, ${array.cromossomo.green}, ${array.cromossomo.blue});"></div>
               <div class="pata-esquerda"></div>
+              <div class="pata-esquerda-superior"></div>
               <div class="pata-esquerda esquerda-traseira"></div>
-              <div class="pata-direita"></div>
+              <div class="pata-direita"></div>            
+              <div class="pata-direita-superior"></div>
               <div class="pata-direita direita-traseira"></div>
             </div>
           </div>
@@ -135,7 +125,7 @@
     `
     }
 
-    function insertBetterBeatle (array){
+    function insertBetterBeatle(array) {
       let container = document.querySelector('#best--container')
       container.innerHTML = `
       <div id="best--header">
@@ -149,7 +139,9 @@
             <div class="cabecaMenor"></div>
             <div class="corpo" style="--bg: rgb(${array.cromossomo.red}, ${array.cromossomo.green}, ${array.cromossomo.blue})"></div>
             <div class="pata-esquerda"></div>
+            <div class="pata-esquerda-superior"></div>
             <div class="pata-esquerda esquerda-traseira"></div>
+            <div class="pata-direita-superior"></div>
             <div class="pata-direita"></div>
             <div class="pata-direita direita-traseira"></div>
           </div>

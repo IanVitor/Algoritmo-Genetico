@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Montserrat";
 }
 
 body{
@@ -10,10 +13,20 @@ body{
 
 header{
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 24px;
   padding: 12px;
   background-color: #fdfdfd;
+}
+
+#header--text{
+  text-align: center;
+}
+
+.header--img img{
+  width: 50px;
+  height: 50px;
 }
 
 main{
@@ -22,10 +35,11 @@ main{
   height: 80vh;
   display: flex;
   border-radius: 10px;
+  background-color: #fff;
 }
 
 form{
-  background-color: #fdfdfd;
+  background-color: #fff;
   width: 30%;
   height: 100%;
   display: flex;
@@ -64,6 +78,11 @@ form{
   background-color: #08b808;
   color: #fff;
   margin: 12px;
+  transition: 0.3s all ease-in-out;
+}
+
+#submit:hover{
+  transform: scale(1.03);
 }
 
 #results--panel{
@@ -108,6 +127,7 @@ form{
   flex-wrap: wrap;
   overflow-x: hidden;
   overflow-y: auto;
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar {
@@ -251,6 +271,38 @@ form{
   border-radius: 30% 30% 40% 40%;
 }
 
+.pata-esquerda-superior{
+  position: absolute;
+  top: -15%;/*30px*/
+  left: -10%;/*-20px*/
+  width: 6%;/*7px*/
+  height: 26%;/*36px*/
+  transform: rotate(150deg);
+  background-color: #434a54;
+  border-radius: 3px;
+}
+
+.pata-esquerda-superior::after {
+  content: '';
+  position: absolute;
+  top: -30%;/*10px*/
+  left: -80%;/*7px*/
+  width: 120%;/*7px*/
+  height: 50%;/*18px*/
+  transform: rotate(140deg);
+  background-color: #434a54;
+}
+.pata-esquerda-superior::before {
+  content: '';
+  position: absolute;
+  top: 80%;/*30px*/
+  left: 40%;/*-3px*/
+  width: 120%;/*7px*/
+  height: 45%;/*15px*/
+  transform: rotate(-30deg);
+  background-color: #434a54;
+}
+
 .pata-esquerda {
   position: absolute;
   top: 20%;/*30px*/
@@ -314,6 +366,38 @@ form{
   width: 120%;/*7px*/
   height: 45%;/*15px*/
   transform: rotate(-30deg);
+  background-color: #434a54;
+}
+
+.pata-direita-superior{
+  position: absolute;
+  top: -16%;/*10px*/
+  left: 105%;/*20px*/
+  width: 6%;/*7px*/
+  height: 26%;/*36px*/
+  transform: rotate(30deg);
+  background-color: #434a54;
+  border-radius: 3px;
+}
+
+.pata-direita-superior::after {
+  content: '';
+  position: absolute;
+  top: -30%;/*-10px*/
+  left: 60%;/*-7px*/
+  width: 120%;/*7px*/
+  height: 50%;/*18px*/
+  transform: rotate(30deg);
+  background-color: #434a54;
+}
+.pata-direita-superior::before {
+  content: '';
+  position: absolute;
+  top: 90%;/*30px*/
+  left: -40%;/*3px*/
+  width: 120%;/*7px*/
+  height: 45%;/*15px*/
+  transform: rotate(20deg);
   background-color: #434a54;
 }
 
